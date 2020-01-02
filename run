@@ -103,12 +103,12 @@ MDIR="$PWD"
 DIR="$PWD/deploy"
 cd $DIR
 INSTANCE="$PWD/instance"
+MODMAN="$PWD/.modman"
 MAGE_INIT_PARAMS="--magento-init-params=MAGE_DIRS[base][path]=$INSTANCE&MAGE_DIRS[cache][path]=$INSTANCE/var/cache"
 
 SEK=SECONDS
 echo 'Remove old files ...'
 rm -rf $INSTANCE
-modman repair --force
 echo 'Create new instance folders and files ...'
 mkdir -p $INSTANCE;
 cd $INSTANCE
@@ -119,6 +119,9 @@ mkdir -p pub/static;
 mkdir -p var;
 
 cp -rf $MDIR/app app
+if [ "$MODMAN" ]; then 
+       cp -rf $MDIR/.modman/NiceForNow app/NiceForNow	
+fi
 cp -rf $MDIR/bin bin
 cp -rf $MDIR/dev dev
 cp -rf $MDIR/lib lib
