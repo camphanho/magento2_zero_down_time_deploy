@@ -108,6 +108,7 @@ MAGE_INIT_PARAMS="--magento-init-params=MAGE_DIRS[base][path]=$INSTANCE&MAGE_DIR
 SEK=SECONDS
 echo 'Remove old files ...'
 rm -rf $INSTANCE
+modman repair --force
 echo 'Create new instance folders and files ...'
 mkdir -p $INSTANCE;
 cd $INSTANCE
