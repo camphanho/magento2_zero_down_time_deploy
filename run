@@ -213,7 +213,7 @@ fi
 
 cd $MDIR
 bin/magento c:f
-
+chmod -R 777 var/ pub/ generated/
 echo 'Remove tmp files ...'
 rm -rf $INSTANCE
 
