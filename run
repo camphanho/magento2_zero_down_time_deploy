@@ -149,6 +149,13 @@ if [ "$MODMAN" ]; then
        modman repair --force
 fi
 
+if [ $SETUP_ALL ]; then
+    cd $MDIR
+    bin/magento maintenance:enable
+    cd $INSTANCE
+    bin/magento setup:upgrade --keep-generated $MAGE_INIT_PARAMS
+fi
+
 if [ $SETUP_ALL ] || [ $SETUP_DI ]; then
     bin/magento setup:di:compile
 fi
@@ -157,14 +164,6 @@ if [ $SETUP_ALL ] || [ $SETUP_STATIC_CONTENT ]; then
     #$INSTANCE/bin/magento setup:static-content:deploy
     . "$DIR/app/static-content-deploy.sh"
     cd $INSTANCE
-fi
-
-
-if [ $SETUP_ALL ]; then
-    cd $MDIR
-    bin/magento maintenance:enable
-    cd $INSTANCE
-    bin/magento setup:upgrade --keep-generated $MAGE_INIT_PARAMS
 fi
 
 
